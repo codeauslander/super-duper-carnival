@@ -1,5 +1,6 @@
 # Complete the function below.
 
+
 def solve_minesweeper(puzzle_array) 
 
   def ajust(puzzle_array)
@@ -17,12 +18,17 @@ def solve_minesweeper(puzzle_array)
 
 
   def print_puzzle_array(puzzle_array)
+    
     puzzle_array.each do |r|
       p r
     end
     puts 
     puts
   end
+
+  ajusted_puzzle_array = ajust(puzzle_array)
+
+
 
   def rule_1(puzzle_array,r,column)
     points = 0
@@ -61,6 +67,12 @@ def solve_minesweeper(puzzle_array)
     # up
     points += 1 if r - 1 > -1 && 
                    puzzle_array[r - 1][column] == -1  
+    # # up_left                                          
+    # points += 1 if column - 1 > -1 && r - 1 > -1 &&  
+    #                puzzle_array[r - 1][column - 1] == -1
+    # # up_rigth
+    # points += 1 if r - 1 > -1 && column + 1 < puzzle_array[r].length &&
+    #                puzzle_array[r - 1][column + 1] == -1
 
     points
   end
@@ -113,32 +125,49 @@ def solve_minesweeper(puzzle_array)
   end
 
   def mine(puzzle_array)
+    puts "ajust rule_6"
+    print_puzzle_array(puzzle_array)
+
     puzzle_array.each_with_index do |r,i|
       r.each_with_index do |item,j|
         puzzle_array[i][j] += rule_1(puzzle_array,i,j)
       end
     end
-    
+    puts "rule_1"
+    print_puzzle_array(puzzle_array)
+
     puzzle_array.each_with_index do |r,i|
       r.each_with_index do |item,j|
         puzzle_array[i][j] += rule_2(puzzle_array,i,j)
       end
     end
+    puts "rule_2"
+    print_puzzle_array(puzzle_array)
+
 
     puzzle_array = rule_3(puzzle_array)
+    puts "rule_3"
+    print_puzzle_array(puzzle_array)
+
     puzzle_array = rule_4(puzzle_array)
+    puts "rule_4"
+    print_puzzle_array(puzzle_array)
+
     
     puzzle_array.each_with_index do |r,i|
       r.each_with_index do |item,j|
         puzzle_array[i][j] += rule_5(puzzle_array,i,j)
       end
     end
-
+    puts "rule_5"
+    print_puzzle_array(puzzle_array)
     puzzle_array
+    
   end
 
-  ajusted_puzzle_array = ajust(puzzle_array)
   result = mine(ajusted_puzzle_array)
+  
+
 end
 
 puzzle_array = [
