@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <script type="text/javascript">
+    function registerHandlers() {
+      console.log('a')
+      var as = document.getElementsByTagName('a');
+      for (var i = 0; i < as.length; i++) {
+        as[i].onclick = function() {
+          alert(i);
+          return false;
+        }
+      }
+    }
+    
+  </script>
+  In my life, I used the following web search engines:<br/>
+  <a >Yahoo!</a><br/>
+  <a >AltaVista</a><br/>
+  <a >Google</a><br/>
+</body>
+
+</html>
+
+<!-- ---------------------------------------- -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Articles</title>
+  <style>
+    /* Write your CSS solution here (do not edit the surrounding HTML) */
+    html body {
+      width: 100%; height: 100%; padding: 0; margin: 0;
+    }
+    body article {
+      width: 50%; height: 50%; float: left;
+    }
+    body article:nth-of-type(1) { 
+      background: red; 
+    }
+    body article:nth-of-type(2) { 
+      background: yellow; 
+    }
+    body article:nth-of-type(3) { 
+      background: blue; 
+    }
+    body article:nth-of-type(4) { 
+      background: green; 
+    }
+    
+  </style>
+</head>
+<body>
+  <article>First</article>
+  <article>Second</article>
+  <article>Third</article>
+  <article>Fourth</article>
+</body>
+</html>
+
+
+<!-- ---------------------------------------- -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Styling links</title>
+    <style type="text/css">
+      /* Write your CSS solution here (do not edit the surrounding HTML) */
+      a::before{
+        content: ">";
+      }
+      a::after{
+        content: "<";
+      }
+      a {
+        color: purple;
+        text-transform: uppercase;
+        text-decoration: none;
+        cursor: help;
+      }
+     
+    </style>
+  </head>
+  <body>
+    <a href="http://www.testdome.com">Check documentation</a>
+  </body>
+</html>
