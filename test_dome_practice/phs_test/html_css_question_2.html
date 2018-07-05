@@ -1,0 +1,54 @@
+<!-- https://jsfiddle.net/cesarcatano/sc6ady28/ -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Widgets</title>
+  <style>
+    /* Insert your CSS solution here */
+    body {
+      background: yellow;
+    }
+    
+    body > div { /* main */
+      width: 300px;
+      height: 100px;
+      position: absolute;
+      top:0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      background: gray;
+    }
+    body div div:nth-of-type(1){ /* widget1 */
+      width: 100px;
+      height: 75px;
+      float: left;
+      background: blue;
+    }
+    body div div:nth-of-type(2){ /* content */
+      background: purple;
+    }
+    body div div:nth-of-type(3){ /* widget2 */
+      position: fixed; 
+      top: 0px;
+      right: 0px;
+      background: green;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div class="widget1">Widget1</div>
+    <div class="content">
+      Content ... ... ... ... ... ... ... ... ... ... ... ... ...
+      ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+      ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+      ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+      ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+    </div>
+    <div class="widget2">Widget2</div>
+  </div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 function appendChildren(decorateDivFunction) {
   var allDivs = document.getElementsByTagName("div");
-  var length =  allDivs.length;
-  for (var i = 0; i < length; i++) {
+  const allDivsLength = allDivs.length;
+  for (var i = 0; i < allDivsLength; i++) {
     var newDiv = document.createElement("div");
     decorateDivFunction(newDiv);
     allDivs[i].appendChild(newDiv);
@@ -15,10 +15,9 @@ document.body.innerHTML = `
   </div>
 </div>`;
 
-//appendChildren(function(div) {});
+appendChildren(function(div) {});
 console.log(document.body.innerHTML);
 
-// var x = document.getElementById("myLI").parentElement.remove();
 // ----------------------------------------------------------
 
 function formatDate(userDate) {
@@ -65,6 +64,49 @@ document.body.innerHTML = `
 setup();
 
 document.getElementsByClassName("remove")[0].click();
+console.log(document.body.innerHTML);
+
+// ----------------------------------------------------------
+
+// https://es6console.com/jj7v5701/
+function setup() {
+  // Write your code here.
+  const elements = document.getElementsByTagName("span");
+  Array.prototype.forEach.call(elements, function(element) {
+    element.addEventListener("click", function(){
+      
+      element.classList.add('active');
+
+      let previous = element.previousElementSibling;
+      while(previous != null){
+        previous.classList.add('active');
+        previous = previous.previousElementSibling;
+      }
+
+      let next = element.nextElementSibling;
+      while(next != null){
+        next.classList.remove('active');
+        next = next.nextElementSibling; 
+      }
+
+    });
+  });
+}
+
+// Example case. 
+document.body.innerHTML = `
+<div>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>`;
+
+setup();
+
+document.getElementsByTagName("span")[2].click();
 console.log(document.body.innerHTML);
 
 
