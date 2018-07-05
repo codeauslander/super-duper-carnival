@@ -1,12 +1,28 @@
 class CategoryTree
-  def initialize(category = nil)
-    @root = category
+  attr_accessor :category, :parent, :children
+  def initialize(category,parent)
+    @category = category
+    @parent = nil
+    @children = []
   end
-  def add_category(category,parent)
 
+  def add_category(category,parent)
+    node = search(parent)
+    node.children << CategoryTree.new(category,parent)
   end
+
+  def search(category)
+    node = self
+    children = node.children
+    index = children.index(category)
+    while (index == nil)
+      
+    end
+  end
+
   def get_children(category)
-    return []
+    node = search(category)
+    return node.children
   end
 end
 
@@ -18,3 +34,4 @@ c.add_category('C','B')
 c.add_category('D','A')
 
 p c.get_children('A')
+
