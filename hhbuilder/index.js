@@ -4,6 +4,7 @@ var elements = {
   ageInput: document.querySelector('.builder form input[name="age"]'),
   relSelect: document.querySelector('.builder form select[name="rel"]'),
   smokerCheckbox: document.querySelector('.builder form input[name="smoker"]'),
+  householdOrderList: document.querySelector('.household'),
 };
 
 var state = {
@@ -26,6 +27,7 @@ function displayNotification(elementInput,message) {
 function addHousehold(id,age,rel,smoker) {
   var household = {id: id, age: age, rel: rel, smoker: smoker};
   state.householdList.push(household);
+  elements.householdOrderList.innerHTML = state.householdList;
 }
 
 elements.addButton.addEventListener('click', function (event) {
