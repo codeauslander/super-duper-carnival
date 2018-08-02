@@ -29,6 +29,20 @@ function retrieve(options) {
     }
   }
   // here start the request using fetch fetch(path).then.....
+  fetch(uri).then(function (response) {
+    var contentType = response.headers.get("content-type");
+    return contentType;
+  }).then(function (contentType) {
+    if (contentType && contentType.indexOf('application/json' !== -1)) {
+      return contentType.json().then(function(data) {
+        var result = {};
+        if (options.page === undefined || options.page === 1) {
+          result.previousPage = null;
+        } 
+      })
+
+    }
+  });
 }
 
 export default retrieve;
