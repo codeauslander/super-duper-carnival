@@ -14,8 +14,8 @@ function getResults(section,uriQuery, results,index) {
   if (results === null) {
     results = {'ids': [], 'open': [], 'closedPrimaryCount': 0, 'previousPage': null, 'nextPage': 2};
     if (uriQuery.offset !== 0) {
-      results.previousPage = (uriQuery.offset - 1);
-      results.nextPage = uriQuery.offset + 1;
+      results.previousPage = uriQuery.offset;
+      results.nextPage = uriQuery.offset + 2;
     }
   }
   var object = section[index];
@@ -30,31 +30,35 @@ function getResults(section,uriQuery, results,index) {
   } else if (object.disposition === 'closed' && isPrimary(object.color)) {
     results.closedPrimaryCount = results.closedPrimaryCount + 1;  
   }
-  getResults(section,uriQuery,results,index + 1);
+  return getResults(section,uriQuery,results,index + 1);
 }
 
-function getSection(startIndex, end, section, list) {
-  if (startIndex === end ) {
-    console.log('section',section);
+function getSection(startIndex, end, amount, section = [], list) {
+  console.log(section.length);
+  if (section.length === 10 && section != undefined) {
+    console.log(section);
     return section;
   }
   section.push(list[startIndex]);
-  getSection(startIndex + 1, end, section, list);
+  return getSection(startIndex + 1, end,amount, section, list);
 }
 
-function getData(uri, uriQuery, offset) {
-  var amount = uriQuery.limit;
-  var end = amount * (offset + 1);
-  var start = end - amount;
+function getData(uri, uriQuery, offset, end, start, amount) {
 
   uriQuery.limit = end;
   uri.setSearch(uriQuery);
 
+  // `return  fetch(uri).then(function (response) {
+    //   return response.json();
+    // }).catch(function(error) {
+    //   console.log(error,'error');
+    // });`
+  
   return  fetch(uri).then(function (response) {
     return response.json();
   }).then(function (data) {
-    console.log('data', data);
-    return getSection(start, end, [], data);
+    console.log('data', data[0]);
+    return getSection(start, end, amount, [], data);
   }).then(function (section) {
     console.log('section', section);
     return getResults(section, uriQuery, null, 0);
@@ -77,7 +81,16 @@ function retrieve(options) {
   uri.setSearch(uriQuery);
 
   console.log('uriQuery',uriQuery);
- 
-  return getData(uri, uriQuery, uriQuery.offset);
+
+  var amount = uriQuery.limit;
+  var end = amount * (uriQuery.offset + 1);
+  var start = end - amount;
+  if (uriQuery.offset != 0) {
+    start = start - (uriQuery.offset);
+  }
+
+
+  return getData(uri, uriQuery, uriQuery.offset, end, start, amount);
+
 }
 export default retrieve;
