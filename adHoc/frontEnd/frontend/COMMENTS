@@ -1,0 +1,11 @@
+Setup for fetch
+Requirements: NodeJS > 4, yarn
+
+yarn install to install.
+
+yarn test to run the provided unit tests.
+
+
+
+Setup for hhbuilder
+Open index.html in the browser.
